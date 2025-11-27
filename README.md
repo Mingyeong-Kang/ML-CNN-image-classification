@@ -204,8 +204,6 @@ tqdm
 python train.py --model baseline
 ```
 
-</br></br></br>
-
 ### **Full Training Example**
 ```bash
 python train.py --model resnet18 --epochs 20 --lr 0.001
