@@ -1,18 +1,19 @@
+## resnet18_finetune.py
+## Machine Learning Team Project - Ewha 
+## Original author: Sanna Ascard-Soederstroem
+
 import torch.nn as nn
-from torchvision.models import resnet18, ResNet18_Weights
+import torchvision.models as models
 
+class ResNet18(nn.Module):
+    def __init__(self, num_classes=10, pretrained=True):
+        super(ResNet18, self).__init__()
 
-def ResNet18(num_classes=10, pretrained=True):
-    """
-    ImageNet으로 pretrain된 ResNet18을 불러와
-    마지막 FC layer만 CIFAR-10에 맞게 교체.
-    """
-    if pretrained:
-        weights = ResNet18_Weights.IMAGENET1K_V1
-        model = resnet18(weights=weights)
-    else:
-        model = resnet18(weights=None)
+        self.model = models.resnet18(pretrained=pretrained)
 
-    in_features = model.fc.in_features
-    model.fc = nn.Linear(in_features, num_classes)
-    return model
+        ## replace the final layer (1000 → 10)
+        in_features = self.model.fc.in_features
+        self.model.fc = nn.Linear(in_features, num_classes)
+
+    def forward(self, x):
+        return self.model(x)
