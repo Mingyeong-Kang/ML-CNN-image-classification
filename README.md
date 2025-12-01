@@ -234,11 +234,11 @@ python train.py --model efficientnet --epochs 20
 
 ## 👥 12. Team Members
 
-| Name            | Role                                                                                  |
-|-----------------|----------------------------------------------------------------------------------------|
-| **강민경**      | EfficientNet-B0 implementation, training pipeline, integration, poster design          |
-| **Sanna Ascard-Soederstroem** | Baseline CNN implementation, ResNet18 fine-tuning, experimental runs                  |
-| **이은서** | Visualization (curves + confusion matrix), documentation, video editing               |
+| Name            | Role                                                                      |
+|-----------------|---------------------------------------------------------------------------|
+| **강민경**      | EfficientNet-B0 implementation, training pipeline, integration            |
+| **Sanna Ascard-Soederstroem** | Baseline CNN implementation, ResNet18 fine-tuning, experimental runs      |
+| **이은서** | Visualization (curves + confusion matrix), documentation, video editing, poster design |
 
 </br></br></br>
 

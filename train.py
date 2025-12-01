@@ -1,4 +1,5 @@
 import argparse
+import json  # 결과를 JSON으로 저장
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -8,6 +9,11 @@ from data import get_cifar10_loaders
 from models.baseline_cnn import BaselineCNN
 from models.resnet18_finetune import ResNet18
 
+# y_true/y_pred + Grad-CAM에서에 쓰기 위한 CIFAR-10 클래스 이름들
+CLASS_NAMES = [
+    "airplane", "automobile", "bird", "cat", "deer",
+    "dog", "frog", "horse", "ship", "truck",
+]
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -52,12 +58,16 @@ def train_one_epoch(model, loader, criterion, optimizer, device):
     epoch_acc = correct / total
     return epoch_loss, epoch_acc
 
-
+# 테스트 데이터셋에 대한 평가수행 함수
 def evaluate(model, loader, criterion, device):
     model.eval()
     running_loss = 0.0
     correct = 0
     total = 0
+
+    # 전체 정답 레이블과 예측값을 모아둘 바구니 2개
+    all_targets = []
+    all_preds = []
 
     with torch.no_grad():
         for images, labels in tqdm(loader, desc="Eval", leave=False):
@@ -70,9 +80,14 @@ def evaluate(model, loader, criterion, device):
             correct += preds.eq(labels).sum().item()
             total += labels.size(0)
 
+            # CPU로 가져와 리스트에 계속 추가
+            all_targets.extend(labels.cpu().tolist())
+            all_preds.extend(preds.cpu().tolist())
+
     epoch_loss = running_loss / total
     epoch_acc = correct / total
-    return epoch_loss, epoch_acc
+    # loss, acc + 전체 y_true / y_pred 리턴
+    return epoch_loss, epoch_acc, all_targets, all_preds
 
 
 def main():
@@ -92,7 +107,11 @@ def main():
     "train_loss": [],
     "train_acc": [],
     "test_loss": [],
-    "test_acc": []
+    "test_acc": [],
+    # confusion matrix, class별 정확도용 키
+    "y_true": [],  # 마지막 epoch에서의 전체 정답 라벨
+    "y_pred": [],  # 마지막 epoch에서의 전체 예측 라벨
+    "class_names": CLASS_NAMES,  # CIFAR-10 클래스 이름
     }
 
     for epoch in range(1, args.epochs + 1):
@@ -101,7 +120,8 @@ def main():
         train_loss, train_acc = train_one_epoch(
             model, train_loader, criterion, optimizer, device
         )
-        test_loss, test_acc = evaluate(
+        # evaluate return
+        test_loss, test_acc, y_true, y_pred = evaluate(
             model, test_loader, criterion, device
         )
 
@@ -115,7 +135,15 @@ def main():
         history["test_loss"].append(test_loss)
         history["test_acc"].append(test_acc)
 
-    import json
+        # 매 epoch마다 마지막 평가 결과로 y_true / y_pred를 덮어씀 (최종 모델의 예측)
+        history["y_true"] = y_true
+        history["y_pred"] = y_pred
+
+    # resnet18 학습이 끝났을 때 weight를 저장 (Grad-CAM)
+    if args.model == "resnet18":
+        torch.save(model.state_dict(), "resnet18_cifar10.pth")
+        print("Saved ResNet18 weights to resnet18_cifar10.pth")
+
     filename = f"results_{args.model}.json"
     with open(filename, "w") as f:
         json.dump(history, f, indent=4)
