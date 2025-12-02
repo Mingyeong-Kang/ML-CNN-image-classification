@@ -160,7 +160,7 @@ After full training, results will include:
 |-----------------|---------------|------------|------------|
 | Baseline CNN    | 81.13%        | Fast       | ~1M        |
 | ResNet18        | 84.30%        | Medium     | ~11M       |
-| EfficientNet-B0 | ~89–93%       | Medium     | ~5M        |
+| EfficientNet-B0 | 85.99 %       | Medium     | ~5M        |
 
 Plots (accuracy curves, loss curves, confusion matrices)  
 will be added inside the `/plots` directory.
