@@ -40,7 +40,7 @@ Dataset used: **CIFAR-10**
    
 ## 📂 3. Repository Structure
 ```
-project-root/
+ML-CNN-image-classification/
 │ 
 ├── train.py # Training script 
 ├── data.py # CIFAR-10 dataloader   
