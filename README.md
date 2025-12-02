@@ -45,7 +45,8 @@ ML-CNN-image-classification/
 ├── train.py # Training script 
 ├── data.py # CIFAR-10 dataloader   
 ├── requirements.txt   
-├── .gitignore   
+├── .gitignore
+├── README.md
 │  
 ├── models/  
 │ ├── baseline_cnn.py   
@@ -58,7 +59,9 @@ ML-CNN-image-classification/
 │ ├── results_resnet18.json   
 │ └── results_efficientnet.json   
 │   
-└── plots/ # Accuracy/Loss curves & confusion matrices   
+├── plots/ # Accuracy/Loss curves & confusion matrices
+└── .idea/ # PyCharm/IntelliJ 개발환경 설정 파일 (IDE 자동 생성)   
+
 ```
 
 > **Note:** Dataset (`data/`) is *not* included in GitHub.  
