@@ -50,13 +50,13 @@ project-root/
 ├── models/  
 │ ├── baseline_cnn.py   
 │ ├── resnet18_finetune.py   
-│ ├── efficientnet_b0.py   
-│ └── init.py   
+│ ├── efficientnet.py   
+│ └── __init__.py   
 │   
 ├── results/   
 │ ├── results_baseline.json  
 │ ├── results_resnet18.json   
-│ └── results_efficientnet_b0.json   
+│ └── results_efficientnet.json   
 │   
 └── plots/ # Accuracy/Loss curves & confusion matrices   
 ```
