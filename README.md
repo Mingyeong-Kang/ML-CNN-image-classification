@@ -158,8 +158,8 @@ After full training, results will include:
 
 | Model           | Test Accuracy | Train Time | Parameters |
 |-----------------|---------------|------------|------------|
-| Baseline CNN    | ~70%          | Fast       | ~1M        |
-| ResNet18        | ~85–92%       | Medium     | ~11M       |
+| Baseline CNN    | 81.13%        | Fast       | ~1M        |
+| ResNet18        | 84.30%        | Medium     | ~11M       |
 | EfficientNet-B0 | ~89–93%       | Medium     | ~5M        |
 
 Plots (accuracy curves, loss curves, confusion matrices)  
