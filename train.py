@@ -1,5 +1,5 @@
 import argparse
-import json  # 결과를 JSON으로 저장
+import json  # 결과 JSON으로 저장
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -8,6 +8,7 @@ from tqdm import tqdm
 from data import get_cifar10_loaders
 from models.baseline_cnn import BaselineCNN
 from models.resnet18_finetune import ResNet18
+from models.efficientnet import get_efficientnet
 
 # y_true/y_pred + Grad-CAM에서에 쓰기 위한 CIFAR-10 클래스 이름들
 CLASS_NAMES = [
@@ -18,8 +19,8 @@ CLASS_NAMES = [
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str, default="baseline",
-                        choices=["baseline", "resnet18"])
-    parser.add_argument("--epochs", type=int, default=2)  # 오늘은 1~2 epoch만
+                        choices=["baseline", "resnet18", "efficientnet"],)
+    parser.add_argument("--epochs", type=int, default=2)
     parser.add_argument("--batch_size", type=int, default=128)
     parser.add_argument("--lr", type=float, default=1e-3)
     return parser.parse_args()
@@ -30,6 +31,8 @@ def get_model(name: str):
         return BaselineCNN(num_classes=10)
     elif name == "resnet18":
         return ResNet18(num_classes=10, pretrained=True)
+    elif name == "efficientnet":
+        return get_efficientnet(num_classes=10, pretrained=True)
     else:
         raise ValueError(f"Unknown model name: {name}")
 

@@ -1,7 +1,3 @@
-## resnet18_finetune.py
-## Machine Learning Team Project - Ewha 
-## Original author: Sanna Ascard-Soederstroem
-
 import torch.nn as nn
 import torchvision.models as models
 

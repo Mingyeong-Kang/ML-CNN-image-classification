@@ -1,7 +1,3 @@
-## plot_results.py
-## Machine Learning Team Project - Ewha 
-## Original author: Sanna Ascard-Soederstroem
-
 import json
 import os
 import matplotlib.pyplot as plt

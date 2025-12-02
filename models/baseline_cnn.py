@@ -1,7 +1,3 @@
-## baseline_cnn.py
-## Machine Learning Team Project - Ewha 
-## Original author: Sanna Ascard-Soederstroem
-
 import torch.nn as nn
 
 class BaselineCNN(nn.Module):

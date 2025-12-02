@@ -21,6 +21,9 @@ def get_cifar10_loaders(batch_size=128, num_workers=2):
 
     # test용: 증강 X, 정규화만
     transform_test = transforms.Compose([
+        transforms.RandomCrop(32, padding=4),
+        transforms.RandomHorizontalFlip(),
+        transforms.ColorJitter(brightness=0.2, contrast=0.2),
         transforms.ToTensor(),
         transforms.Normalize(
             mean=(0.4914, 0.4822, 0.4465),
