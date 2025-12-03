@@ -40,25 +40,28 @@ Dataset used: **CIFAR-10**
    
 ## 📂 3. Repository Structure
 ```
-project-root/
+ML-CNN-image-classification/
 │ 
 ├── train.py # Training script 
 ├── data.py # CIFAR-10 dataloader   
 ├── requirements.txt   
-├── .gitignore   
+├── .gitignore
+├── README.md
 │  
 ├── models/  
 │ ├── baseline_cnn.py   
 │ ├── resnet18_finetune.py   
-│ ├── efficientnet_b0.py   
-│ └── init.py   
+│ ├── efficientnet.py   
+│ └── __init__.py   
 │   
 ├── results/   
 │ ├── results_baseline.json  
 │ ├── results_resnet18.json   
-│ └── results_efficientnet_b0.json   
+│ └── results_efficientnet.json   
 │   
-└── plots/ # Accuracy/Loss curves & confusion matrices   
+├── plots/ # Accuracy/Loss curves & confusion matrices
+└── .idea/ # PyCharm/IntelliJ 개발환경 설정 파일 (IDE 자동 생성)   
+
 ```
 
 > **Note:** Dataset (`data/`) is *not* included in GitHub.  
@@ -160,7 +163,7 @@ After full training, results will include:
 |-----------------|---------------|------------|------------|
 | Baseline CNN    | 81.13%        | Fast       | ~1M        |
 | ResNet18        | 84.30%        | Medium     | ~11M       |
-| EfficientNet-B0 | ~89–93%       | Medium     | ~5M        |
+| EfficientNet-B0 | 85.99 %       | Medium     | ~5M        |
 
 Plots (accuracy curves, loss curves, confusion matrices)  
 will be added inside the `/plots` directory.
