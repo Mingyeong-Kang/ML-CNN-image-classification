@@ -40,7 +40,7 @@ def plot_curves(history, model_name, save_dir="plots"):
 ## Main
 def main():
     ## List of models to plot
-    models = ["baseline", "resnet18"]  
+    models = ["baseline", "resnet18", "efficientnet"]
 
     for model_name in models:
         file_path = f"results/results_{model_name}.json"

@@ -147,6 +147,11 @@ def main():
         torch.save(model.state_dict(), "resnet18_cifar10.pth")
         print("Saved ResNet18 weights to resnet18_cifar10.pth")
 
+    # efficientnet 학습이 끝났을 때 weight 저장 (EfficientNet Grad-CAM 용)
+    if args.model == "efficientnet":
+        torch.save(model.state_dict(), "efficientnet_cifar10.pth")
+        print("Saved EfficientNet weights to efficientnet_cifar10.pth")
+
     filename = f"results_{args.model}.json"
     with open(filename, "w") as f:
         json.dump(history, f, indent=4)
